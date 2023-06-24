@@ -12,11 +12,17 @@ public class InstanceServiceProvider implements ServiceProvider {
 
     private final Map<ServiceIdentifier, Object> instances = new HashMap<>();
 
-    public InstanceServiceProvider() {
+    private InstanceServiceProvider() {
 
     }
 
-    public InstanceServiceProvider(final Iterable<KeyValuePair<ServiceIdentifier, Object>> services) {
+    private InstanceServiceProvider(final Iterable<KeyValuePair<ServiceIdentifier, Object>> services,
+                                    final boolean selfService) {
+
+        if (selfService) {
+            this.addService(this);
+            this.addService(ServiceProvider.class, this);
+        }
 
         services.forEach(service -> this.instances.put(service.getKey(), service.getValue()));
 
@@ -91,6 +97,7 @@ public class InstanceServiceProvider implements ServiceProvider {
     public static class Builder implements FluentBuilder<InstanceServiceProvider> {
 
         private final List<KeyValuePair<ServiceIdentifier, Object>> services = new LinkedList<>();
+        private boolean selfService = false;
 
         @NotNull
         public <T> Builder service(@NotNull final T instance) {
@@ -125,9 +132,17 @@ public class InstanceServiceProvider implements ServiceProvider {
         }
 
         @NotNull
+        public Builder selfService() {
+
+            this.selfService = true;
+            return this;
+
+        }
+
+        @NotNull
         public InstanceServiceProvider build() {
 
-            return new InstanceServiceProvider(this.services);
+            return new InstanceServiceProvider(this.services, this.selfService);
 
         }
 
