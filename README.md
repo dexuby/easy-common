@@ -11,7 +11,7 @@
 
 <dependency>
     <groupId>com.github.dexuby</groupId>
-	  <artifactId>easy-common</artifactId>
-	  <version>...</version>
+    <artifactId>easy-common</artifactId>
+    <version>...</version>
 </dependency>
 ```
