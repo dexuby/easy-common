@@ -16,7 +16,18 @@ public class InstanceServiceProvider implements ServiceProvider {
 
     }
 
-    private InstanceServiceProvider(final Iterable<KeyValuePair<ServiceIdentifier, Object>> services,
+    private InstanceServiceProvider(@NotNull final InstanceServiceProvider.Builder builder) {
+
+        if (builder.selfService) {
+            this.addService(this);
+            this.addService(ServiceProvider.class, this);
+        }
+
+        builder.services.forEach(service -> this.instances.put(service.getKey(), service.getValue()));
+
+    }
+
+    private InstanceServiceProvider(@NotNull final Iterable<KeyValuePair<ServiceIdentifier, Object>> services,
                                     final boolean selfService) {
 
         if (selfService) {
