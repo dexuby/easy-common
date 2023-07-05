@@ -96,7 +96,7 @@ public class InstanceServiceProvider implements ServiceProvider {
 
     public static class Builder implements FluentBuilder<InstanceServiceProvider> {
 
-        private final List<KeyValuePair<ServiceIdentifier, Object>> services = new LinkedList<>();
+        private final List<KeyValuePair<ServiceIdentifier, Object>> services = new ArrayList<>();
         private boolean selfService = false;
 
         @NotNull
