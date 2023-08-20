@@ -7,7 +7,7 @@
     <groupId>dev.dexuby</groupId>
     <artifactId>easy-common</artifactId>
     <name>EasyCommon</name>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
