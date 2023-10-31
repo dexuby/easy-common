@@ -2,10 +2,11 @@ package dev.dexuby.easycommon;
 
 public interface Lockable {
 
-    boolean lock();
+    void lock();
 
-    default boolean unlock() {
-        return false;
+    default void unlock() {
     }
+
+    boolean isLocked();
 
 }

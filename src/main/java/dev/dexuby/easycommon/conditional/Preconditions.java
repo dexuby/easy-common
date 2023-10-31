@@ -16,7 +16,7 @@ public final class Preconditions {
 
     }
 
-    public static <T> void checkState(final boolean state) throws IllegalStateException {
+    public static void checkState(final boolean state) throws IllegalStateException {
 
         if (!state) throw new IllegalStateException("State was false.");
 
